@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import seaborn as sns
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier, export_graphviz
@@ -37,7 +36,7 @@ vis_data = export_graphviz(cls, feature_names=list(X.columns),
                            class_names=list(target),
                            filled=True, rounded=True, special_characters=True)
 graph = graphviz.Source(vis_data)
-graph.save(filename='vis.jpg')
+graph.save(filename='vis.dot')
 graph.render(filename='vis', format='jpg')
 
 code.interact(local=dict(globals(), **locals()))
