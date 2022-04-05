@@ -1,5 +1,7 @@
 '''
 utils.py
+
+Contains various utilities used all over the framework including functions for preprocessing, visualization, and so on.
 '''
 import code
 import unicodedata
@@ -43,6 +45,15 @@ def normalizeString(s):
     return s
 
 
+"""
+Data folder: ./data or ./datasets
+You can create a data folder where you can save resource files. Some people even remove 'w' permission from this folder
+and only allow reading.
+
+You can also create a data script: data_loader.py,
+which includes necessary functions to find and create the right datasets as well as custom data loaders to forward the 
+data to the training pipeline. You can create a base class to represent a dataset.
+"""
 def prepare_data(in_lang, out_lang, max_length, device):
     pairs_raw = []
     pairs_tensor = []
