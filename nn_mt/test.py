@@ -25,5 +25,9 @@ def translate(input):
     translated = model.forward(s)
     print('translated: {}'.format(''.join(translated[1])))
 
-with torch.no_grad():
+# Comments by PyTorch.org albanD
+model.eval()  # eval() will notify all your layers that you are in eval mode, that way, batchnorm or dropout layers will
+              # work in eval model instead of training mode
+with torch.no_grad():  # no_grad() impacts the autograd engine and deactivate it. It will reduce memory usage and speed
+                       # up computations but you won't be able to backprop
     code.interact(local=dict(locals(), **globals()))

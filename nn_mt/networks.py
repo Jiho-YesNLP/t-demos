@@ -1,5 +1,11 @@
 '''
 networks.py
+
+Typically, you will have a dedicated folder (e.g., models/ networks/) for the files like this.
+`networks.py` specifies your neural network model. You can build more complex models and variants.
+
+
+When defining a network class, there are two requirements: defining __init__ and forward functions.
 '''
 
 import code
@@ -9,6 +15,8 @@ from torch import nn
 import torch.nn.functional as F
 
 class EncoderRNN(nn.Module):
+    # The first requirement is to define __init__ function that references nn.Module. This function is
+    # where you define the components of your network and their sizes
     def __init__(self, input_size, device, hidden_size=256):
         super().__init__()
         self.device = device
@@ -16,7 +24,10 @@ class EncoderRNN(nn.Module):
         self.embedding = nn.Embedding(input_size, hidden_size)
         self.gru = nn.GRU(hidden_size, hidden_size)
         self.to(device)
-    
+
+    # The second requirement is to define forward function. This function defines the structure of your network.
+    # This function pass the data into the computation graph and represents the feed-forward algorithm. You can use
+    # any of the Tensor operations in the forward function.
     def forward(self, input, hidden):
         embedded = self.embedding(input).view(1, 1, -1)
         output, hidden = self.gru(embedded, hidden)
